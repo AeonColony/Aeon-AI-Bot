@@ -95,6 +95,10 @@ function test($bot) {
         'callback_query_id' => $bot->Callback_ID()
     );
     $bot->answerCallbackQuery($answer_callback);
+    
+    // allow the bot to respond to the command in a private message
+    // this is by default set to allow, but can be overridden and instead a message will be sent saying that this command needs to be used within the group
+    allowInPM($bot, false);
 
 }
 
