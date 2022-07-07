@@ -21,10 +21,6 @@ function weather($bot, $arguments) {
             $hmdt = $weather_data['current_condition'][0]['humidity'];
             $windk = $weather_data['current_condition'][0]['windspeedKmph'];
             $region = $weather_data['nearest_area']['areaName']['value'];
-            $cnt = $weather_data['nearest_area'][0]['country'][0]['value'];
-
-            error_log($region);
-            error_log($cnt);
 
             $reply = "The weather in " . $arguments . " is currently: <b>" . $wea_desc . "</b>\n
 Current Temp: <b>" . $cu_temp . "</b>°c
@@ -43,9 +39,14 @@ weather data provided by <a href=\"https://wttr.in/\">https://wttr.in/</a>
 
     $content = array('chat_id' => $bot->ChatID(), 'disable_web_page_preview' => 'True', 'parse_mode'=>'HTML', 'text' => $reply, 'reply_to_message_id' => $bot->MessageID());
     $botResponse = $bot->sendMessage($content);
-
-    error_log(print_r($botResponse, true));
-
+    
+    
+    // saves the bots replies to the bots database
+    // function arguments:
+    // $bot, is the bot its self,
+    // $botResponse['result']['message_id'] - this needs to be the returned message ID (needs to be passed as an int)
+    // $botResponse['result']['text'] - this is the response/reply of the bot (needs to be passed as a string)
+    // 1 - this is true/false as to wheather this message and the command will get auto deleted after 24 hours as to not flood the chat. (Needs to be passed as int (0/1))  
     saveBotReplies($bot, $botResponse['result']['message_id'], $botResponse['result']['text'], '1');
 }
 
