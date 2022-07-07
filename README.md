@@ -12,6 +12,7 @@ Please create a new fork and then add your newly created module into the modules
 # Current Commands
 ```
 /address
+/api
 /asciiart
 /ban
 /banuser
@@ -40,6 +41,7 @@ Please create a new fork and then add your newly created module into the modules
 /report
 /roll
 /sc
+/shill
 /site
 /slippage
 /socials
